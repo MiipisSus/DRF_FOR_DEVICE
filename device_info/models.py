@@ -24,6 +24,7 @@ class DeviceVideoInfo(models.Model):
         CBR = 1
     
     # mainstream
+    enabled_main = models.BooleanField(default=True)
     encode_type_main = models.IntegerField(default=EncodeTypeChoices.H265, choices=EncodeTypeChoices.choices)
     bit_rate_main = models.IntegerField(default=3072, validators=[MinValueValidator(512), MaxValueValidator(8192)])
     quality_main = models.IntegerField(default=40, validators=[MinValueValidator(10), MaxValueValidator(50)])
@@ -36,6 +37,7 @@ class DeviceVideoInfo(models.Model):
     video_encoding_main = models.IntegerField(default=VideoEncodingChoices.CBR, choices=VideoEncodingChoices.choices)
     
     # substream
+    enabled_sub = models.BooleanField(default=True)
     encode_type_sub = models.IntegerField(default=EncodeTypeChoices.H265, choices=EncodeTypeChoices.choices)
     bit_rate_sub = models.IntegerField(default=1024, validators=[MinValueValidator(256), MaxValueValidator(4096)])
     quality_sub = models.IntegerField(default=40, validators=[MinValueValidator(10), MaxValueValidator(50)])
@@ -48,6 +50,7 @@ class DeviceVideoInfo(models.Model):
     video_encoding_sub = models.IntegerField(default=VideoEncodingChoices.CBR, choices=VideoEncodingChoices.choices)
     
     # thirdtream
+    enabled_third = models.BooleanField(default=True)
     encode_type_third = models.IntegerField(default=EncodeTypeChoices.MJPEG, choices=EncodeTypeChoices.choices)
     bit_rate_third = models.IntegerField(default=1500, validators=[MinValueValidator(256), MaxValueValidator(2048)])
     quality_third = models.IntegerField(default=40, validators=[MinValueValidator(10), MaxValueValidator(50)])
@@ -117,16 +120,20 @@ class DeviceImageInfo(models.Model):
     bw_mode = models.IntegerField(default=BWModeChoices.By_IR_type, choices=BWModeChoices.choices)
     
     # WB
-    wb_mode = models.IntegerField(default=WBChoices.ATW, choices=WBChoices.choices)
-
+    wb_enabled = models.BooleanField(default=True)
+    wb_scene_mode = models.IntegerField(default=WBChoices.ATW, choices=WBChoices.choices)
+    wb_scene_value = models.IntegerField(default=0)
+    
     # Exposure
+    exposure_enabled = models.BooleanField(default=True)
     flickness = models.IntegerField(default=FlicknessChoices.Auto, choices=FlicknessChoices.choices)
     day_mode_exposure = models.IntegerField(default=DayModeExposureChoices.Auto, choices=DayModeExposureChoices.choices)
-    day_exposure_time = models.IntegerField(default=30)
-    day_exposure_Gain = models.IntegerField(default=10, validators=[MinValueValidator(1), MaxValueValidator(30)])
+    day_exposure_time = models.IntegerField(default=30, validators=[MinValueValidator(30), MaxValueValidator(10000)])
+    day_exposure_gain = models.IntegerField(default=10, validators=[MinValueValidator(1), MaxValueValidator(16)])
+    night_mode_exposure_enabled = models.BooleanField(default=False)
     night_mode_exposure = models.IntegerField(default=NightModeExposureChoices.Off, choices=NightModeExposureChoices.choices)
     night_exposure_time = models.IntegerField(default=30)
-    night_exposure_Gain = models.IntegerField(default=15, validators=[MinValueValidator(1), MaxValueValidator(30)])
+    night_exposure_gain = models.IntegerField(default=15, validators=[MinValueValidator(1), MaxValueValidator(15)])
     
     # Image Enhancement
     # Day Mode
@@ -135,6 +142,7 @@ class DeviceImageInfo(models.Model):
     contrast = models.IntegerField(default=50, validators=[MinValueValidator(1), MaxValueValidator(100)])
     hue = models.IntegerField(default=50, validators=[MinValueValidator(1), MaxValueValidator(100)])
     saturation = models.IntegerField(default=50, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    wdr_enabled = models.BooleanField(default=False)
     wdr = models.IntegerField(null=True, default=None, validators=[MinValueValidator(1), MaxValueValidator(10)])
     # Night Mode
     brightness_night = models.IntegerField(default=50, validators=[MinValueValidator(1), MaxValueValidator(100)])
@@ -142,6 +150,7 @@ class DeviceImageInfo(models.Model):
     contrast_night = models.IntegerField(default=50, validators=[MinValueValidator(1), MaxValueValidator(100)])
     hue_night = models.IntegerField(default=50, validators=[MinValueValidator(1), MaxValueValidator(100)])
     saturation_night = models.IntegerField(default=50, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    wdr_night_enabled = models.BooleanField(default=False)
     wdr_night = models.IntegerField(null=True, default=None, validators=[MinValueValidator(1), MaxValueValidator(10)])
     
     # Defog
