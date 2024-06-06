@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     
     # apps
     'device_info',
-    'web'
+    'web',
+    'storage'
 ]
 
 MIDDLEWARE = [

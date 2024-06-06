@@ -1,11 +1,8 @@
-from django.http import JsonResponse
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
 
-from .models import DeviceVideoInfo, DeviceImageInfo, DeviceBasicInfo
-from .serializers import DeviceBasicInfoSerializer, DeviceVideoInfoSerializer
+from .models import *
+from .serializers import *
 
 import json
 
@@ -26,6 +23,42 @@ class SetBasicDeviceInfo(APIView):
         
         return Response(serializer.errors, status=400)
         
+
+class GetNetworkInfo(APIView):
+    def get(self, request):
+        network_info = DeviceNetworkInfo.objects.all()
+        serializer = DeviceNetworkInfoSerializer(network_info)
+        return Response(serializer.data)
+
+
+class SetNetworkInfo(APIView):
+    def post(self, request):
+        network_info = DeviceNetworkInfo.objects.first()
+        serializer = DeviceNetworkInfoSerializer(network_info, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        
+        return Response(serializer.errors, status=400)
+    
+
+class GetOSDInfo(APIView):
+    def get(self, request):
+        osd_info = DeviceOSDInfo.objects.first()
+        serializer = DeviceOSDInfoSerializer(osd_info)
+        return Response(serializer.data)
+
+
+class SetOSDInfo(APIView):
+    def post(self, request):
+        osd_info = DeviceOSDInfo.objects.first()
+        serializer = DeviceOSDInfoSerializer(osd_info, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        
+        return Response(serializer.errors, status=400)
+
 
 class GetMultimediaValueVideoView(APIView):
     def get(self, request):
@@ -151,152 +184,39 @@ class GetMultimediaValueVideoView(APIView):
 class GetMultimediaValueImageView(APIView):
     def get(self, request):
         image_info = DeviceImageInfo.objects.first()
-        imaging_data = \
-        {
-            "imaging_0":
-                {
-                    "brightness": image_info.brightness,
-                    "brightness_in": DeviceImageInfo._meta.get_field('brightness').default,
-                    "brightness_night": image_info.brightness_night,
-                    "brightness_night_in": DeviceImageInfo._meta.get_field('brightness_night').default,
-                    "bwmode": image_info.bw_mode,
-                    "contrast": image_info.contrast,
-                    "contrast_in": DeviceImageInfo._meta.get_field('contrast').default,
-                    "contrast_night": image_info.contrast_night,
-                    "contrast_night_in": DeviceImageInfo._meta.get_field('contrast_night').default,
-                    "exposure":
-                        {
-                            "enabled": image_info.exposure_enabled,
-                            "exp0": DeviceImageInfo._meta.get_field('day_exposure_gain').validators[0].limit_value,
-                            "exp1": DeviceImageInfo._meta.get_field('day_exposure_gain').validators[1].limit_value,
-                            "exposuretime": 
-                                {
-                                    "max": DeviceImageInfo._meta.get_field('day_exposure_time').validators[1].limit_value,
-                                    "min": DeviceImageInfo._meta.get_field('day_exposure_time').validators[0].limit_value,
-                                    "value": image_info.day_exposure_time
-                                },
-                            "gain":
-                                {
-                                    "max": DeviceImageInfo._meta.get_field('day_exposure_gain').validators[1].limit_value,
-                                    "min": DeviceImageInfo._meta.get_field('day_exposure_gain').validators[0].limit_value,
-                                    "value": image_info.day_exposure_gain
-                                },
-                            "mode": image_info.day_mode_exposure,
-                            "nightmode":
-                                {
-                                    "enabled": image_info.night_mode_exposure_enabled,
-                                    "exp0": DeviceImageInfo._meta.get_field('night_exposure_gain').validators[0].limit_value,
-                                    "exp1": DeviceImageInfo._meta.get_field('night_exposure_gain').validators[1].limit_value,
-                                    "gain": image_info.night_exposure_gain,
-                                    "gainmax": DeviceImageInfo._meta.get_field('night_exposure_gain').validators[1].limit_value,
-                                }
-                        },
-                    "saturation": image_info.saturation,
-                    "saturation_in": DeviceImageInfo._meta.get_field('saturation').default,
-                    "saturation_night": image_info.saturation_night,
-                    "saturation_night_in": DeviceImageInfo._meta.get_field('saturation_night').default,
-                    "sharpness": image_info.sharpness,
-                    "sharpness_in": DeviceImageInfo._meta.get_field('sharpness').default,
-                    "sharpness_night": image_info.sharpness_night,
-                    "sharpness_night_in": DeviceImageInfo._meta.get_field('sharpness_night').default,
-                    "sensor":
-                        {
-                            "flip": image_info.flip,
-                            "mirror": image_info.mirror
-                        },
-                    "wb":
-                        {
-                            "enable": image_info.wb_enabled,
-                            "scenemode": image_info.wb_scene_mode,
-                            "scenevalue": image_info.wb_scene_value
-                        },
-                    "wdr":
-                        {
-                            "enabled": image_info.wdr_enabled,
-                            "value": image_info.wdr
-                        },
-                    "wdr_in":
-                        {
-                            "enabled": DeviceImageInfo._meta.get_field('wdr_enabled').default,
-                            "value": DeviceImageInfo._meta.get_field('wdr').default
-                        },
-                    "wdr_night":
-                        {
-                            "enabled": image_info.wdr_night_enabled,
-                            "value": image_info.wdr_night
-                        },
-                    "wdr_night_in":
-                        {
-                            "enabled": DeviceImageInfo._meta.get_field('wdr_night_enabled').default,
-                            "value": DeviceImageInfo._meta.get_field('wdr_night').default
-                        }
-                }
-        }
+        serializer = DeviceImageInfoSerializer(image_info)
         
-        return Response(imaging_data)
+        return Response(serializer.data)
     
     
 class SetMultimediaValueVideoView(APIView):
     def post(self, request):
         video_info = DeviceVideoInfo.objects.first()
         serializer = DeviceVideoInfoSerializer(video_info, data=request.data, partial=True)
-        # self.update_instance(data)
-        # response = Response({"message": "Update video info success."}, status=200)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         
         return Response(serializer.errors, status=400)
-    
-    def update_instance(self, data):
-        video_info = DeviceVideoInfo.objects.first()
-        
-        def update_if_not_None(field, value):
-            if value is not None:
-                setattr(video_info, field, value)
-        
-        def update_profile(profile_data, prefix):
-            if not profile_data:
-                return
-            
-            update_if_not_None(f'enabled_{prefix}', profile_data.get('enabled'))
-            update_if_not_None(f'encode_type_{prefix}', profile_data.get('encode_type'))
-            update_if_not_None(f'frame_rate_{prefix}', profile_data.get('framerate'))
-            update_if_not_None(f'gop_{prefix}', profile_data.get('gop'))
-            update_if_not_None(f'jpeg_quality_{prefix}', profile_data.get('jpeg_quality'))
-            update_if_not_None(f'url_{prefix}', profile_data.get('name'))
-
-            quality = profile_data.get('quality')
-            if quality:
-                update_if_not_None(f'quality_{prefix}', quality.get('value'))
-            
-            ratecontrol = profile_data.get('ratecontrol')
-            if ratecontrol:
-                update_if_not_None(f'bit_rate_{prefix}', ratecontrol.get('bitrate'))
-                update_if_not_None(f'video_encoding_{prefix}', ratecontrol.get('mode'))
-            
-            resolution = profile_data.get('resolution')
-            if resolution:
-                update_if_not_None(f'resolution_width_{prefix}', resolution.get('width'))
-                update_if_not_None(f'resolution_height_{prefix}', resolution.get('height'))
-        
-        update_profile(data.get('profile_0'), 'main')
-        update_profile(data.get('profile_1'), 'sub')
-        update_profile(data.get('profile_2'), 'third')
-        
-        video_info.save()
         
         
 class SetMultimediaValueImageView(APIView):
     def post(self, request):
-        try:
-            data = request.data
-            self.update_instance(data)
-            response = Response({"message": "Update image info success."}, status=200)
-        except:
-            response = Response({"message": "Update image info failed."}, status=400)
+        image_info = DeviceImageInfo.objects.first()
+        serializer = DeviceImageInfoSerializer(image_info, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        
+        return Response(serializer.errors, status=400)
+        # try:
+        #     data = request.data
+        #     self.update_instance(data)
+        #     response = Response({"message": "Update image info success."}, status=200)
+        # except:
+        #     response = Response({"message": "Update image info failed."}, status=400)
 
-        return response
+        # return response
     
     def update_instance(self, data):
         image_info = DeviceImageInfo.objects.first()

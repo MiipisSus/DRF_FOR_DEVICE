@@ -193,8 +193,41 @@ class DeviceNetworkInfo(models.Model):
     rtsp_auth_password = models.CharField(null=True, default=None, max_length=30)
 
 
+class DeviceOSDInfo(models.Model):
+    class ColorChoices(models.IntegerChoices):
+        transparent = 0
+        white = 1
+        grey = 2
+        red = 3
+        green = 4
+        blue = 5
+        black = 6
+        transparent_red = 7
+        transparent_green = 8
+        transparent_blue = 9
+    
+    class PositionChoices(models.IntegerChoices):
+        left_top = 0
+        center_top = 1
+        right_top = 2
+        left_bottom = 3
+        center_bottom = 4
+        right_bottom = 5
+        
+    camera_name_enabled = models.BooleanField(default=True)
+    camera_name = models.CharField(default='IP CAMERA', max_length=50)
+    background_color = models.IntegerField(default=ColorChoices.grey, choices=ColorChoices.choices)
+    font_color = models.IntegerField(default=ColorChoices.white, choices=ColorChoices.choices)
+    
+    datetime_enabled = models.BooleanField(default=True)
+    datetime_display_position = models.IntegerField(default=PositionChoices.left_top, choices=PositionChoices.choices)
+    
+    intelligent_osd_enabled = models.BooleanField(default=True)
+    
+
 class DeviceInfo(models.Model):
-    basic_info = models.ForeignKey(DeviceBasicInfo, on_delete=models.CASCADE)
-    network_info = models.ForeignKey(DeviceNetworkInfo, on_delete=models.CASCADE)
-    video_info = models.ForeignKey(DeviceVideoInfo, on_delete=models.CASCADE)
-    image_info = models.ForeignKey(DeviceImageInfo, on_delete=models.CASCADE)
+    basic_info = models.ForeignKey(DeviceBasicInfo, on_delete=models.CASCADE, default=1)
+    network_info = models.ForeignKey(DeviceNetworkInfo, on_delete=models.CASCADE, default=1)
+    video_info = models.ForeignKey(DeviceVideoInfo, on_delete=models.CASCADE, default=1)
+    image_info = models.ForeignKey(DeviceImageInfo, on_delete=models.CASCADE, default=1)
+    osd_info = models.ForeignKey(DeviceOSDInfo, on_delete=models.CASCADE, default=1)

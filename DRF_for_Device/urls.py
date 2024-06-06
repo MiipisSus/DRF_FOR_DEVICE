@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('web.urls')),
     path('api/', include('api.urls')),
-    path('api/device_info/', include('device_info.urls'))
+    path('api/device_info/', include('device_info.urls')),
+    path('api/storage/', include('storage.urls'))
 ]
