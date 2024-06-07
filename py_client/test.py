@@ -8,6 +8,7 @@ def get_auth(username, password):
         "password": password
     }
     res = requests.post(auth_url, data=payload)
+    print(res.content)
     
     return res.json()['token']
      
@@ -92,12 +93,27 @@ def set_osd_info(username, password):
     res = requests.post(url, headers=headers, json=data)
     print(res.content)
     
-    
-username = "admin"
-password = "admin"
+def set_storage_info(username, password):
+    url = "http://127.0.0.1:8000/api/storage/info/update/"
+    token = get_auth(username, password)
+    headers = {
+        "Authorization": f"Token {token}",
+        "Content-Type": "application/json"
+    }
+    data = \
+        {
+            "duration": 70
+        }
+    res = requests.post(url, headers=headers, json=data)
+    print(res.content)
+
+username = "muri"
+password = "murimuri"
 
 # get_multimedia_value_video(username, password)
-set_multimedia_value_video(username, password)
+# set_multimedia_value_video(username, password)
 # set_multimedia_value_image(username, password)
 # set_basic_device_info(username, password)
 # set_osd_info(username, password)
+set_storage_info(username, password)
+# get_auth(username, password)

@@ -32,7 +32,7 @@
             box-sizing: border-box;
         }
         button {
-            background-color: #4CAF50;
+            background-color: #6B8A7A;
             color: white;
             padding: 14px 20px;
             margin: 8px 0;
@@ -42,7 +42,25 @@
             width: 100%;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #254336;
+        }
+        button:active {
+            background-color: #B7B597;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            font-size: 8px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            text-align: center; 
+            border: 1.5px solid black;
+            border-radius: 3px; 
+            padding: 5px; 
+        }
+        
+        .show-error {
+            opacity: 1;
         }
     </style>
 </head>
@@ -50,7 +68,7 @@
 
 <div class="container">
     <h2>Login</h2>
-    <form action="/login/" method="post">
+    <form id="loginForm" action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
@@ -59,8 +77,26 @@
         <input type="password" id="password" name="password" required>
 
         <button type="submit">Login</button>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error-message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var errorMessages = document.querySelectorAll('.error-message');
+        
+        errorMessages.forEach(function(element) {
+            element.classList.add('show-error'); // 添加show-error類，啟動動畫
+            setTimeout(function() {
+                element.classList.remove('show-error'); // 移除show-error類，觸發漸出動畫
+            }, 2000);
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -3,6 +3,11 @@ from rest_framework import serializers
 from .models import *
 
 class DeviceBasicInfoSerializer(serializers.ModelSerializer):
+    mac_address = serializers.CharField(read_only=True)
+    system_boot_time = serializers.DateTimeField(read_only=True)
+    product_model = serializers.CharField(read_only=True)
+    firmware_version = serializers.CharField(read_only=True)
+    
     class Meta:
         model = DeviceBasicInfo
         fields = '__all__'
