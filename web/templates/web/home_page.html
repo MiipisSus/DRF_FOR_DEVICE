@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #6B8A7A;
+            background-color: #FFFFFF;
             margin: 0; /* Added to remove default margin */
             padding: 0; /* Added to remove default padding */
         }
@@ -17,23 +17,15 @@
         }
         .content {
             flex: 1; /* Added flex property to make content take remaining space */
-            padding: 20px;
+            padding: 0px 20px; /* Reduced padding to move elements upward */
+            background-color: #FFFFFF; /* Added white background color */
         }
-        h1 {
-            text-align: center;
-            color: white;
+        .main-content {
+            border: 1px solid black;
+            border-radius: 3px;
+            margin-top: 10px; /* Reduced margin-top to move elements upward */
         }
-        p {
-            color: white;
-        }
-        a {
-            color: white;
-            text-decoration: none;
-        }
-        a:hover {
-            color: #254336;
-        }
-        button {
+        .main-container button {
             background-color: #6B8A7A;
             color: white;
             padding: 14px 20px;
@@ -41,30 +33,28 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            width: 100%;
+            font-size: 10px;
         }
-        button:hover {
+        .main-container button:hover {
             background-color: #254336;
         }
-        button:active {
+        .main-container button:active {
             background-color: #B7B597;
         }
-        
     </style>
 </head>
 <body>
     <div class="container">
         {% include 'web/navbar.html' %}
         <div class="content">
-            <h1>DRF For Device</h1>
-            <p>Work on progress...</p>
-        </div>
-        <div class="logout-btn">
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button>Logout</button>
+            {% include 'web/header.html' %}
+            <div class="main-content">
+                {% if sub_page %}
+                    {% include 'web/'|add:sub_page|add:'.html' %}
+                {% endif %}
+            </div>
         </div>
     </div>
-    
 </body>
+
 </html>

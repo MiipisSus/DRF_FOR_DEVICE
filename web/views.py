@@ -2,13 +2,36 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 
+from device_info.models import *
+from device_info.forms import *
 
 @login_required(login_url='login')
 def home_page(request):
-    return render(request, 'web/home_page.html')
+    context = {
+        'header_name': 'Home'
+    }
+    return render(request, 'web/home_page.html', context)
 
+def basic_page(request):
+    instance = DeviceBasicInfo.objects.first()
+    if request.method == 'POST':
+        form = DeviceBasicForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('basic')
+    else:
+        form = DeviceBasicForm(instance=instance)
+        
+    context = {
+        'header_name': 'System / Basic Information',
+        'sub_page': 'basic_page',
+        'instance': instance,
+        'form': form
+    }
+    return render(request, 'web/home_page.html', context)
+    
+    
 def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')

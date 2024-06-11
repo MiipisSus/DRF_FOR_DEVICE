@@ -8,6 +8,7 @@
         .navbar {
             background-color: #254336;
             width: calc(200px - 20px); 
+            height: 100%;
             padding: 100px 10px; 
             margin: 0 auto; 
         }
@@ -19,26 +20,91 @@
         .navbar a {
             display: block;
             color: white;
-            padding: 16px;
+            padding: 10px;
             text-decoration: none;
             border-bottom: 1px solid white;
+            position: relative;
+            padding-left: 1px;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+        .navbar a .arrow {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
         }
         .navbar a:hover {
-            background-color: #6B8A7A;
+            color: #B7B597;
+        }
+        .dropdown-container {
+            display: none;
+        }
+        .dropdown-container a {
+            padding: 10px;
+            border-bottom: 1px solid grey;
+            margin: 0 10px;
+            font-size: 10px
         }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="javascript:void(0)" class="dropdown-btn">System <span class="arrow">&#9660;</span></a>
+                <div class="dropdown-container">
+                    <a href="/system/basic/">Basic Information</a>
+                    <a href="/system/datetime/">Date Time</a>
+                </div>
+            </li>
+            <li><a href="javascript:void(0)" class="dropdown-btn">Video <span class="arrow">&#9660;</span></a>
+                <div class="dropdown-container">
+                    <a href="#">Option 1</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+            </li>
+            <li><a href="javascript:void(0)" class="dropdown-btn">Link <span class="arrow">&#9660;</span></a>
+                <div class="dropdown-container">
+                    <a href="#">Option 1</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+            </li>
+            <li><a href="javascript:void(0)" class="dropdown-btn">Network <span class="arrow">&#9660;</span></a>
+                <div class="dropdown-container">
+                    <a href="#">Option 1</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+            </li>
+            <li><a href="javascript:void(0)" class="dropdown-btn">Security <span class="arrow">&#9660;</span></a>
+                <div class="dropdown-container">
+                    <a href="#">Option 1</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
 
-<nav class="navbar">
-    <ul>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-    </ul>
-</nav>
+<script>
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
