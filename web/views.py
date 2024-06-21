@@ -6,11 +6,21 @@ from django.contrib.auth.decorators import login_required
 from device_info.models import *
 from device_info.forms import *
 
+import requests
+
 @login_required(login_url='login')
 def home_page(request):
+    try:
+        res = requests.get('https://api.thecatapi.com/v1/images/search')
+        image_url = res.json()[0]['url']
+    except:
+        image_url = None
+        
     context = {
-        'header_name': 'Home'
+        'header_name': 'Home',
+        'image_url': image_url
     }
+    
     return render(request, 'web/home_page.html', context)
 
 def basic_page(request):
@@ -31,7 +41,14 @@ def basic_page(request):
     }
     return render(request, 'web/home_page.html', context)
     
+def datetime_page(request):
+    context = {
+        'header_name': 'System / Datetime',
+        'sub_page': 'datetime_page'
+    }
     
+    return render(request, 'web/home_page.html', context)
+
 def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')

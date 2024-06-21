@@ -1,0 +1,49 @@
+body {
+  position: relative;
+
+  margin: 0;
+  padding: 0;
+
+  background-color: #ffffff;
+
+  font-family: Arial, sans-serif;
+}
+.main-container {
+  position: absolute;
+  inset: 16vh 1vw auto 18vw;
+
+  max-height: 80vh;
+
+  border-radius: 4px;
+}
+.main-container button {
+  background-color: #6b8a7a;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+}
+.main-container button:hover {
+  background-color: rgb(37, 67, 54);
+}
+.main-container button:active {
+  background-color: #b7b597;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+  height: 10%;
+
+  background-color: black
+}
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* 使圖像適應容器 */
+}

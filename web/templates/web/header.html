@@ -1,59 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header</title>
-    <style>
-        .main-header {
-            background-color: #254336; /* Added dark green header */
-            height: 40px; /* Adjust height as needed */
-            display: flex;
-            align-items: center;
-            justify-content: left; /* Centering text horizontally */
-            padding: 0 20px;
-        }
-        .main-header-text {
-            color: white;
-            font-size: 0.8em;
-        }
-        .upper-header {
-            display: flex;
-            height: 20px;
-            justify-content: flex-end;
-            padding: 10px 20px;
-            margin: 10px 0;
-            background-color: white; /* White background */
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Grey shadow */
-        }
-        .upper-header a {
-            display: inline-block;
-            color: black;
-            font-size: 10px;
-            width: 35px;
-            height: 20px;
-            line-height: 20px;
-            border: 1px solid black;
-            border-radius: 2px;
-            text-decoration: none;
-            margin-left: 10px;
-            text-align: center;
-            vertical-align: middle;
-        }
-        .upper-header a:hover {
-            background-color: #6B8A7A;
-            color: white;
-            border: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="upper-header">
+    <link rel="stylesheet" href="{% static 'styles/header.css' %}" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="upper-header">
         <a href="/" class="upper-header-button">Live</a>
         <a href="/logout/" class="upper-header-button">Logout</a>
+      </div>
+      <div class="main-header">Live</div>
     </div>
-    <div class="main-header">
-        <span class="main-header-text">{{ header_name }}</span>
-    </div>
-</body>
+  </body>
 </html>

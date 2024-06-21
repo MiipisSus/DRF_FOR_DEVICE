@@ -1,0 +1,168 @@
+.datetime-container {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px 15px;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 4px;
+}
+.datetime-container p {
+  font-size: 20px;
+  font-weight: bold;
+}
+.system-time-section,
+.time-zone-section {
+  display: flex;
+  flex-direction: row;
+}
+.dst-setting {
+  width: 65%;
+
+  padding: 10px 20px;
+  margin-right: 2vw;
+  background-color: rgb(242, 242, 242);
+}
+.dst-setting label {
+  padding-right: 5px;
+}
+.dst-setting p {
+  font-size: 16px;
+}
+.start-time-container,
+.end-time-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 3vw;
+}
+#start-time-combobox,
+#end-time-combobox
+{
+  margin-right: 3vw;
+}
+.daylight-save {
+  display: flex;
+  justify-content: end;
+
+  padding-top: 3vh;
+}
+.system-time-section .system-time-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 35%;
+
+  border: 1px solid rgb(201, 201, 201);
+}
+.system-time-section .system-time-display div {
+  transform: translateX(5vw);
+}
+.system-time-section .system-time-title {
+  margin: 0;
+
+  font-size: 14px;
+}
+.system-time-section .system-date,
+.system-time-section .system-time {
+  margin: 2px;
+
+  font-size: 30px;
+}
+.system-time-display .system-date {
+  padding-bottom: 20px;
+}
+.ntp-setting {
+  width: 50%;
+
+  padding: 20px 20px;
+  margin-right: 2vw;
+
+  background-color: rgb(242, 242, 242);
+}
+.time-zone-cbx {
+  width: 100%;
+
+  border-radius: 4px;
+
+  background-color: transparent;
+
+  font-size: 16px;
+}
+.radio-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+.radio-container label {
+  padding: 10px 0;
+}
+.ntp-server-setting-link {
+  color: darkcyan;
+
+  text-decoration: none;
+
+  transition: color 0.15s;
+}
+.ntp-server-setting-link:hover {
+  color: rgb(0, 80, 80);
+}
+.machine-time-zone-container .system-time-display {
+  display: flex;
+  flex-direction: row;
+}
+.machine-time-zone-container .system-time-display p{
+  font-size: 14px;
+
+  padding-left: 50px;
+  margin-bottom: 0;
+}
+.manual-setting {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+
+  padding: 10px 20px 20px 20px;
+
+  background-color: rgb(242, 242, 242);
+}
+.manual-setting p {
+  font-size: 14px;
+}
+.calendar-select {
+  width: 40%;
+}
+.selected-datetime {
+  display: flex;
+  flex-direction: column;
+}
+.selected-time {
+  padding-top: 30%;
+}
+.selected-date {
+  padding-top: 15%;
+}
+.selected-date p {
+  margin: 0;
+
+  font-weight: normal;
+  font-size: 16px;
+}
+#selected-date {
+  padding: 5px 5px;
+  margin-top: 10%;
+  border: 0.15em solid rgb(0, 80, 80);
+  border-radius: 2px;
+
+  background-color: white;
+}
+.button-container {
+  display: flex;
+  justify-content: end;
+
+  width: 100%;
+
+  padding-top: 5px;
+}
+.button-container button {
+  padding: 10px 30px;
+}

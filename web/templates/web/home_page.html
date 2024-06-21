@@ -1,60 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF;
-            margin: 0; /* Added to remove default margin */
-            padding: 0; /* Added to remove default padding */
-        }
-        .container {
-            display: flex; /* Added to use flexbox for layout */
-            height: 100vh; /* Added to make container full height */
-        }
-        .content {
-            flex: 1; /* Added flex property to make content take remaining space */
-            padding: 0px 20px; /* Reduced padding to move elements upward */
-            background-color: #FFFFFF; /* Added white background color */
-        }
-        .main-content {
-            border: 1px solid black;
-            border-radius: 3px;
-            margin-top: 10px; /* Reduced margin-top to move elements upward */
-        }
-        .main-container button {
-            background-color: #6B8A7A;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 10px;
-        }
-        .main-container button:hover {
-            background-color: #254336;
-        }
-        .main-container button:active {
-            background-color: #B7B597;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        {% include 'web/navbar.html' %}
-        <div class="content">
-            {% include 'web/header.html' %}
-            <div class="main-content">
-                {% if sub_page %}
-                    {% include 'web/'|add:sub_page|add:'.html' %}
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</body>
+    <link rel="stylesheet" href="{% static 'styles/home_page.css' %}">
+  </head>
+  <body>
+    {% include 'web/navbar.html' %}
+    {% include 'web/header.html' %}
 
+    <div class="main-container">
+      {% if sub_page %}
+        {% include 'web/'|add:sub_page|add:'.html' %}
+      {% else %}
+        {% if image_url %}
+          <div class="image-container">
+            <img src="{{ image_url }}" alt="Image">
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+
+  </body>
 </html>

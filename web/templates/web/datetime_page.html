@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'styles/datetime_page.css' %}" />
+  </head>
+  <body>
+    <div class="datetime-container">
+      <div class="machine-system-time-container">
+        <p>Set the machine system time</p>
+        <div class="system-time-section">
+          <div class="dst-setting">
+            <p>DST Start:</p>
+            <div class="start-time-container">
+              <label>
+                Month:
+                <select id="month-combobox" class="combobox"></select>
+              </label>
+              <label>
+                Day of Week:
+                <select id="start-week-num-combobox" class="combobox"></select>
+                <select id="start-week-combobox" class="combobox"></select>
+              </label>
+              <label>
+                Time:
+                <select id="start-time-combobox" class="combobox"></select>
+              </label>
+            </div>
+            <p>DST End:</p>
+            <div class="end-time-container">
+              <label>
+                Month:
+                <select id="end-month-combobox" class="combobox"></select>
+              </label>
+              <label>
+                Day of Week:
+                <select id="end-week-num-combobox" class="combobox"></select>
+                <select id="end-week-combobox" class="combobox"></select>
+              </label>
+              <label>
+                Time:
+                <select id="end-time-combobox" class="combobox"></select>
+              </label>
+            </div>
+            <div class="daylight-save">
+              <label for="daylight-save-chk">
+                <input type="checkbox" id="daylight-save-chk">
+                Enable Daylight Saving
+              </label>
+            </div>
+          </div>
+          <div class="system-time-display">
+            <div>
+              <p class="system-time-title">System Date:</p>
+              <p class="system-date">2024-06-21</p>
+            </div>
+            <div>
+              <p class="system-time-title">System Time:</p>
+              <p class="system-time">11:40:49</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="machine-time-zone-container">
+        <p>Select the machine geographical time zone</p>
+        <div class="time-zone-section">
+          <div class="ntp-setting">
+            <select class="time-zone-cbx">
+              <option>GMT-12:00: International Date Line West</option>
+            </select>
+            <form class="radio-container">
+              <label>
+                <input type="radio" class="computer-rbx" name="sync-option">
+                Synchronize with computer time
+                <div class="system-time-display">
+                  <p>System Date: 2024-06-21</p>
+                  <p>System Time: 11:40:49</p>
+                </div>
+              </label>
+              <label>
+                <input type="radio" class="ntp-server-rbx" name="sync-option">
+                <a href="" class="ntp-server-setting-link">
+                  Synchronize with NTP server
+                </a>
+              </label>
+              <label>
+                <input type="radio" class="manual-rbx" name="sync-option">
+                Set Manually
+              </label>
+            </form>
+          </div>
+          <div class="manual-setting">
+            <div class="calendar-select">
+              <p>System Date:</p>
+              {% include 'web/calendar.html' %}
+            </div>
+            <div class="selected-datetime">
+              <div class="selected-time">
+                <label>
+                  System Time:
+                  <select></select>
+                  :
+                  <select></select>
+                  :
+                  <select></select>
+                </label>
+              </div>
+              <div class="selected-date">
+                <p>Selected Date:</p>
+                <p id="selected-date">2024-06-21</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <button type="submit">Save</button>
+      </div>
+    </div>
+  </body>
+</html>

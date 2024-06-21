@@ -1,0 +1,103 @@
+.navbar {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+.expand-btn {
+  position: absolute;
+  top: 0;
+  right: -1.6vw;
+
+  width: 1.6vw;
+  height: 7.8vh;
+  border: 0;
+  border-radius: 0 4px 4px 0;
+
+  background-color: rgb(37, 67, 54);
+
+  cursor: pointer;
+}
+.expand-btn i {
+  color: #ffffff;
+
+  font-size: 24px;
+}
+.title-home-link {
+  color: inherit;
+  text-decoration: none;
+}
+.title-container {
+  margin: 10%;
+
+  border: none;
+  border-radius: 8px;
+
+  background-color: grey;
+
+  line-height: 10px;
+  text-align: center;
+
+  cursor: pointer;
+}
+.navbar-title {
+  padding-top: 5vh;
+  color: white;
+
+  font-weight: bold;
+  font-size: 24px;
+}
+.navbar-subtitle {
+  padding-bottom: 5vh;
+
+  color: lightgray;
+
+  font-size: 16px;
+}
+.navbar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  inset: 0 auto 0 0;
+  margin: 0 auto;
+  background-color: rgb(37, 67, 54);
+}
+.menu-item {
+  padding-bottom: 20px;
+}
+.menu a {
+  position: relative;
+  display: block;
+
+  padding: 10px;
+  margin: 0 10px;
+  border-bottom: 1px solid white;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 16px;
+  transition: color 0.3s;
+}
+.menu a .arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+}
+.menu a:hover {
+  color: #b7b597;
+}
+.dropdown-container {
+  display: none;
+}
+.dropdown-container a {
+  margin: 0 20px;
+
+  border-bottom: 1px solid grey;
+
+  font-size: 12px;
+  text-align: left;
+}

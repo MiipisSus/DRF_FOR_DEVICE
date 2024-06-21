@@ -1,0 +1,61 @@
+.main-header {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  inset: 9vh 1vw auto 18vw;
+
+  height: 5vh;
+
+  padding-left: 20px;
+  border-radius: 4px;
+
+  background-color: #254336;
+  color: white;
+
+  font-weight: bold;
+}
+.main-header-text {
+  color: white;
+  font-size: 0.8em;
+}
+.upper-header {
+  position: fixed;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  inset: 1vh 1vw auto 18vw;
+
+  height: 4vh;
+
+  margin: 10px 0;
+
+  background-color: white;
+
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+
+}
+.upper-header a {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+
+  width: 35px;
+  height: 20px;
+
+  margin-right: 10px;
+  border: 1px solid black;
+  border-radius: 2px;
+
+  color: black;
+
+  font-size: 10px;
+  line-height: 20px;
+
+  text-decoration: none;
+}
+.upper-header a:hover {
+  border: 1px solid rgb(107, 138, 122);
+
+  background-color: rgb(107, 138, 122);
+  color: white;
+}

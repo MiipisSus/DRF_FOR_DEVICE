@@ -1,134 +1,72 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Basic Information</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        .main-container {
-            background-color: #eeeeee;
-            margin: 10px;
-            padding: 5px 0;
-            border-radius: 3px;
-        }
-        .info-container {
-            background-color: #f2f2f2;
-            padding: 10px 20px 0 20px;
-            border-radius: 3px;
-        }
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .info-section, .edit-section {
-            flex: 1;
-            margin: 0 10px;
-        }
-        .info-section h3, .edit-section h3 {
-            margin-top: 0;
-        }
-        .edit-container {
-            background-color: #cccccc;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 3px;
-        }
-        .edit-container form {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .edit-container input {
-            padding: 5px;
-            width: 100%;
-            font-size: 10px;
-            border: 0.1em solid black;
-            border-radius: 3px;
-            transition: border 0.3s;
-        }
-        .edit-container input:focus {
-            border: 0.1em solid #6B8A7A;
-            outline: none; /* Remove default outline */
-        }
-        .edit-container .button-container {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .edit-container button {
-            padding: 5px 20px;
-        }
-        h3 {
-            font-size: 10px;
-        }
-        p {
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <div class="main-container">
-        <div class="info-container">
-            <div class="info-row">
-                <div class="info-section">
-                    <h3>Device Name</h3>
-                    <p>{{instance.device_name}}</p>
-                </div>
-                <div class="info-section">
-                    <h3>Device Location</h3>
-                    <p>{{instance.device_location}}</p>
-                </div>
-                <div class="info-section">
-                    <h3>MAC</h3>
-                    <p>{{instance.mac_address}}</p>
-                </div>
-            </div>
-            <div class="info-row">
-                <div class="info-section">
-                    <h3>System Boot Time</h3>
-                    <p>{{instance.system_boot_time}}</p>
-                </div>
-                <div class="info-section">
-                    <h3>Product Model</h3>
-                    <p>{{instance.product_model}}</p>
-                </div>
-                <div class="info-section">
-                    <h3>Firmware Version</h3>
-                    <p>{{instance.firmware_version}}</p>
-                </div>
-            </div>
-            <div class="info-row">
-                <div class="info-section">
-                    <h3>Static IP Address</h3>
-                    <p>192.168.0.75</p>
-                </div>
-                <div class="info-section">
-                    <h3>DHCP IP Address</h3>
-                    <p>N/A</p>
-                </div>
-                <div class="info-section">
-                    <h3></h3>
-                    <p></p>
-                </div>
-            </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'styles/basic_page.css' %}" />
+  </head>
+  <body>
+    <div class="basic-container">
+      <div class="info-container">
+        <div class="info-section">
+          <h3>Device Name</h3>
+          <p>{{instance.device_name}}</p>
         </div>
-        <div class="edit-container">
-            <form method="post">
-                {% csrf_token %}
-                <div class="edit-section">
-                    <h3>Device Name</h3>
-                    <input type="text" name="device_name" value="{{ form.device_name.value }}">
-                </div>
-                <div class="edit-section">
-                    <h3>Device Location</h3>
-                    <input type="text" name="device_location" value="{{ form.device_location.value }}">
-                </div>
-                <div class="button-container">
-                    <button type="submit">Save</button>
-                </div>
-            </form>
+        <div class="info-section">
+          <h3>Device Location</h3>
+          <p>{{instance.device_location}}</p>
         </div>
+        <div class="info-section">
+          <h3>MAC</h3>
+          <p>{{instance.mac_address}}</p>
+        </div>
+        <div class="info-section">
+          <h3>System Boot Time</h3>
+          <p>{{instance.system_boot_time}}</p>
+        </div>
+        <div class="info-section">
+          <h3>Product Model</h3>
+          <p>{{instance.product_model}}</p>
+        </div>
+        <div class="info-section">
+          <h3>Firmware Version</h3>
+          <p>{{instance.firmware_version}}</p>
+        </div>
+        <div class="info-section">
+          <h3>Static IP Address</h3>
+          <p>192.168.0.75</p>
+        </div>
+        <div class="info-section">
+          <h3>DHCP IP Address</h3>
+          <p>N/A</p>
+        </div>
+      </div>
+      <div class="edit-container">
+        <form method="post">
+          {% csrf_token %}
+          <div class="edit-section">
+            <h3>Device Name</h3>
+            <input
+              type="text"
+              name="device_name"
+              value="{{ form.device_name.value }}"
+            />
+          </div>
+          <div class="edit-section">
+            <h3>Device Location</h3>
+            <input
+              type="text"
+              name="device_location"
+              value="{{ form.device_location.value }}"
+            />
+          </div>
+          <div class="button-container">
+            <button type="submit">Save</button>
+          </div>
+        </form>
+      </div>
     </div>
-</body>
+  </body>
 </html>
