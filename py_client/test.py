@@ -107,13 +107,23 @@ def set_storage_info(username, password):
     res = requests.post(url, headers=headers, json=data)
     print(res.content)
 
+def task_add(username, password):
+    url = "http://127.0.0.1:8000/api/task/add/"
+    token = get_auth(username, password)
+    headers = {
+        "Authorization": f"Token {token}"
+    }
+    res = requests.get(url, headers=headers)
+    print(f"{res.status_code}\n{res.content}")
+    
 username = "muri"
 password = "murimuri"
 
-# get_multimedia_value_video(username, password)
+get_multimedia_value_video(username, password)
 # set_multimedia_value_video(username, password)
 # set_multimedia_value_image(username, password)
 # set_basic_device_info(username, password)
 # set_osd_info(username, password)
-set_storage_info(username, password)
+# set_storage_info(username, password)
 # get_auth(username, password)
+# task_add(username, password)
